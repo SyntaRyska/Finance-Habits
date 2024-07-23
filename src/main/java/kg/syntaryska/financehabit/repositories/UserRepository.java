@@ -1,6 +1,6 @@
-package kg.syntaryska.habit.repositories;
+package kg.syntaryska.financehabit.repositories;
 
-import kg.syntaryska.habit.models.entities.UserEntity;
+import kg.syntaryska.financehabit.models.entities.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
