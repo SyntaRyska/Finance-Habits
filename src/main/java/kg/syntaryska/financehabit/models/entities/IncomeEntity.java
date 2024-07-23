@@ -6,9 +6,11 @@ import java.util.Date;
 
 @Entity
 @Table(name = "incomes")
-public class IncomeEntity extends BaseEntity{
+public class IncomeEntity extends BaseEntity {
 
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
 
     @Column(nullable = false)
     private Double amount;
@@ -21,6 +23,14 @@ public class IncomeEntity extends BaseEntity{
     private Date date;
 
     public IncomeEntity() {
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public Double getAmount() {
@@ -46,4 +56,5 @@ public class IncomeEntity extends BaseEntity{
     public void setSource(String source) {
         this.source = source;
     }
+
 }

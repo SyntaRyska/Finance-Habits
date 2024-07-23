@@ -6,9 +6,11 @@ import java.util.Date;
 
 @Entity
 @Table(name = "reports")
-public class ReportEntity extends BaseEntity{
+public class ReportEntity extends BaseEntity {
 
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
@@ -28,6 +30,14 @@ public class ReportEntity extends BaseEntity{
     private Double netSavings;
 
     public ReportEntity() {
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public Date getEndDate() {
@@ -69,4 +79,7 @@ public class ReportEntity extends BaseEntity{
     public void setTotalIncome(Double totalIncome) {
         this.totalIncome = totalIncome;
     }
+
+
+
 }

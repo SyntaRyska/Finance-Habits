@@ -5,10 +5,12 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "Expenses")
+@Table(name = "expenses")
 public class ExpenseEntity extends BaseEntity {
 
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private UserEntity user;
 
     @Column(nullable = false)
     private Double amount;
@@ -23,6 +25,14 @@ public class ExpenseEntity extends BaseEntity {
     private Date date;
 
     public ExpenseEntity() {
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public Double getAmount() {
@@ -56,5 +66,4 @@ public class ExpenseEntity extends BaseEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-
 }
