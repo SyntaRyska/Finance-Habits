@@ -1,13 +1,11 @@
 package kg.syntaryska.financehabit.models.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
 @Entity
+@Table(name = "Expenses")
 public class ExpenseEntity extends BaseEntity {
 
     private Long userId;
