@@ -16,7 +16,7 @@ public class BudgetEntity extends BaseEntity {
     private String category;
 
     @Column(nullable = false)
-    private Double limit;
+    private Double budgetLimit;
 
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
@@ -54,11 +54,11 @@ public class BudgetEntity extends BaseEntity {
     }
 
     public Double getLimit() {
-        return limit;
+        return budgetLimit;
     }
 
     public void setLimit(Double limit) {
-        this.limit = limit;
+        this.budgetLimit = limit;
     }
 
     public Date getStartDate() {
