@@ -2,7 +2,6 @@ package kg.syntaryska.financehabit.services;
 
 import kg.syntaryska.financehabit.models.dtos.UserDto;
 import kg.syntaryska.financehabit.models.entities.UserEntity;
-import org.apache.catalina.User;
 
 import java.util.List;
 import java.util.Optional;
