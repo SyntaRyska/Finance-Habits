@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
     public UserEntity createUser(UserDto userDto) {
 
         if (userRepository.findByUsername(userDto.getUsername()) != null) {
-            throw new UserAlreadyExistsException("Имя пользователя" + userDto.getUsername() + " уже используется");
+            throw new UserAlreadyExistsException("Имя пользователя " + userDto.getUsername() + " уже используется");
         }
 
         UserEntity userEntity = userMapper.toEntity(userDto);
