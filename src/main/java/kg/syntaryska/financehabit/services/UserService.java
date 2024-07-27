@@ -2,7 +2,6 @@ package kg.syntaryska.financehabit.services;
 
 import kg.syntaryska.financehabit.models.dtos.UserDto;
 import kg.syntaryska.financehabit.models.entities.UserEntity;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,6 +16,6 @@ public interface UserService {
 
     UserEntity createUser(UserDto userDto);
 
-    ResponseEntity<?> deleteUser(Long id);
+    void deleteUser(Long id);
 
 }

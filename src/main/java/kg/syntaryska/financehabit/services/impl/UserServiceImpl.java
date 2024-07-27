@@ -10,8 +10,6 @@ import kg.syntaryska.financehabit.repositories.UserRepository;
 import kg.syntaryska.financehabit.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,16 +30,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserEntity> getAllUsers() {
+        logger.info("Получение всех пользователей");
         return userRepository.findAll();
     }
 
     @Override
     public Optional<UserEntity> getUserById(Long id) {
+        logger.info("Получение пользователя с идентификатором: {}", id);
         return userRepository.findById(id);
     }
 
     @Override
     public UserEntity getUserByUsername(String username) {
+        logger.info("Получение пользователя с именем: {}", username);
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new UserNotFoundExcepion("Пользователь с именем " + username + " не найден"));
     }
@@ -49,6 +50,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public UserEntity createUser(UserDto userDto) {
+        logger.info("Создание пользователя с именем: {}", userDto.getUsername());
         if (userRepository.existsByUsername(userDto.getUsername())) {
             throw new UserAlreadyExistsException("Имя пользователя " + userDto.getUsername() + " уже используется");
         }
@@ -59,13 +61,12 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public ResponseEntity<?> deleteUser(Long id) {
+    public void deleteUser(Long id) {
+        logger.info("Удаление пользователя с идентификатором: {}", id);
         if (!userRepository.existsById(id)) {
             throw new UserNotFoundExcepion("Пользователь с идентификатором " + id + " не существует!");
         }
 
-        logger.info("Удаление пользователя с идентификатором: {}", id);
         userRepository.deleteById(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

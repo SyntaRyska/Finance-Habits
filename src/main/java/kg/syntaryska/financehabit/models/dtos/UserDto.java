@@ -4,6 +4,9 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+/**
+ * Data Transfer Object for User.
+ */
 public class UserDto {
 
     @NotBlank(message = "Имя пользователя обязательно")
@@ -21,6 +24,11 @@ public class UserDto {
     public UserDto() {
     }
 
+    public UserDto(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+    }
     public String getEmail() {
         return email;
     }

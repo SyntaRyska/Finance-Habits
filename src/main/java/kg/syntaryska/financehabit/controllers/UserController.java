@@ -24,7 +24,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping
     public ResponseEntity<List<UserEntity>> getAllUsers() {
         List<UserEntity> users = userService.getAllUsers();
         logger.info("Получены все пользователи");
@@ -44,7 +44,7 @@ public class UserController {
                 });
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<UserEntity> createUser(@Valid @RequestBody UserDto userDto) {
         try {
             UserEntity userEntity = userService.createUser(userDto);
@@ -57,7 +57,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         try {
             userService.deleteUser(id);
