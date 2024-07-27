@@ -40,13 +40,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.findById(id);
     }
 
-    @Override
-    public UserEntity getUserByUsername(String username) {
-        logger.info("Получение пользователя с именем: {}", username);
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundExcepion("Пользователь с именем " + username + " не найден"));
-    }
-
     @Transactional
     @Override
     public UserEntity createUser(UserDto userDto) {
