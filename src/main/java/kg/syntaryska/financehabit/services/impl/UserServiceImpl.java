@@ -8,17 +8,21 @@ import kg.syntaryska.financehabit.models.dtos.UserDto;
 import kg.syntaryska.financehabit.models.entities.UserEntity;
 import kg.syntaryska.financehabit.repositories.UserRepository;
 import kg.syntaryska.financehabit.services.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     private final UserRepository userRepository;
-    private static final Logger logger = Logger.getLogger(UserServiceImpl.class.getName());
     private final UserMapper userMapper;
 
     public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
@@ -32,20 +36,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional <UserEntity> getUserById(Long id) {
+    public Optional<UserEntity> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
     @Override
     public UserEntity getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundExcepion("Пользователь с именем " + username + " не найден"));
     }
 
     @Transactional
     @Override
     public UserEntity createUser(UserDto userDto) {
-
-        if (userRepository.findByUsername(userDto.getUsername()) != null) {
+        if (userRepository.existsByUsername(userDto.getUsername())) {
             throw new UserAlreadyExistsException("Имя пользователя " + userDto.getUsername() + " уже используется");
         }
 
@@ -53,14 +57,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(userEntity);
     }
 
+    @Transactional
     @Override
-    public void deleteUser(Long id) {
+    public ResponseEntity<?> deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
             throw new UserNotFoundExcepion("Пользователь с идентификатором " + id + " не существует!");
         }
 
-        logger.info("Удаление пользователя с идентификатором:" + id);
+        logger.info("Удаление пользователя с идентификатором: {}", id);
         userRepository.deleteById(id);
-        userRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
