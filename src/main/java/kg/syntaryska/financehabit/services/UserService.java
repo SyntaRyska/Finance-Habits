@@ -12,8 +12,6 @@ public interface UserService {
 
     Optional<UserEntity> getUserById(Long id);
 
-    UserEntity getUserByUsername(String username);
-
     UserEntity createUser(UserDto userDto);
 
     void deleteUser(Long id);
