@@ -1,6 +1,7 @@
 package kg.syntaryska.financehabit.models.dtos;
 
-import kg.syntaryska.financehabit.models.entities.BaseEntity;
-
+/**
+ * Data Transfer Object for Budget.
+ */
 public class BudgetDto {
 }

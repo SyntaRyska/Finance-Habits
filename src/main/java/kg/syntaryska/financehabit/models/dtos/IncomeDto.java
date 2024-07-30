@@ -1,5 +1,7 @@
 package kg.syntaryska.financehabit.models.dtos;
 
-public class IncomeDto
-{
+/**
+ * Data Transfer Object for Income.
+ */
+public class IncomeDto {
 }
