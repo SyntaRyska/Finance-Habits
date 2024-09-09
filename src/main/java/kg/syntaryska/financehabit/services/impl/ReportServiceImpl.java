@@ -1,6 +1,7 @@
 package kg.syntaryska.financehabit.services.impl;
 
 import jakarta.transaction.Transactional;
+import kg.syntaryska.financehabit.mappers.ReportMapper;
 import kg.syntaryska.financehabit.models.dtos.ReportDto;
 import kg.syntaryska.financehabit.models.entities.ReportEntity;
 import kg.syntaryska.financehabit.repositories.ReportRepository;
@@ -15,15 +16,20 @@ import java.util.List;
 @Service
 public class ReportServiceImpl implements ReportService {
 
+    private final ReportMapper reportMapper;
     private final ReportRepository reportRepository;
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
-    public ReportServiceImpl(ReportRepository reportRepository) {
+    public ReportServiceImpl(ReportMapper reportMapper, ReportRepository reportRepository) {
+        this.reportMapper = reportMapper;
         this.reportRepository = reportRepository;
     }
 
+    @Transactional
     @Override
     public ReportEntity createReport(ReportDto reportDto) {
+        logger.info("Создание отчета с именем: {}", reportDto.getTotalExpense());
+
         return null;
     }
 

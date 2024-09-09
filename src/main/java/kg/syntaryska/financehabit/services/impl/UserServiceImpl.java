@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public Optional<UserEntity> getUserById(Long id) {
         logger.info("Получение пользователя с идентификатором: {}", id);
         return userRepository.findById(id);
+
     }
 
     @Transactional

@@ -8,10 +8,6 @@ import java.util.Date;
 @Table(name = "reports")
 public class ReportEntity extends BaseEntity {
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserEntity user;
-
     @Temporal(TemporalType.DATE)
     @Column(nullable = false)
     private Date startDate;
@@ -30,14 +26,6 @@ public class ReportEntity extends BaseEntity {
     private Double netSavings;
 
     public ReportEntity() {
-    }
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
     }
 
     public Date getEndDate() {
